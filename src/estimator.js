@@ -13,33 +13,39 @@
 //   totalHospitalBeds: 1380614
 // };
 
-// const impactData = {
-//   currentlyInfected: data.reportedCases * 10,
-//   infectionsByRequestedTime: this.currentlyInfected * 512
-// };
+const currentInfections = (data) => {
+  const currentInfections = data.reportedCases * 10;
+  const infectionsByRequestedTime = {
+    days: currentInfections * Math.pow(2, Math.floor(1 / 3)),
+    weeks: currentInfections * Math.pow(2, Math.floor(7 / 3)),
+    months: currentInfections * Math.pow(2, Math.floor(30 / 3))
+  };
 
-// const severeImpactData = {
-//   currentlyInfected: data.reportedCases * 50,
+  return {
+    currentInfections,
+    infectionsByRequestedTime
+  };
+};
+const projectedInfections = (data) => {
+  const currentInfections = data.reportedCases * 50;
+  const infectionsByRequestedTime = {
+    days: currentInfections * Math.pow(2, Math.floor(1 / 3)),
+    weeks: currentInfections * Math.pow(2, Math.floor(7 / 3)),
+    months: currentInfections * Math.pow(2, Math.floor(30 / 3))
+  };
+
+  return {
+    currentInfections,
+    infectionsByRequestedTime
+  };
+};
+
 //   infectionsByRequestedTime: this.currentlyInfected * 512
-// };
 
 const covid19ImpactEstimator = (data) => ({
   data,
-  impact: {
-    currentlyInfected: data.reportedCases * 50,
-    infectionsByRequestedTime: this.currentlyInfected * 512,
-    severeCasesByRequestedTime: (15 / 100) * this.infectionsByRequestedTime,
-    hospitalBedsByRequestedTime:
-      (35 / 100) * data.totalHospitalBeds - this.severeCasesByRequestedTime
-  },
-  severeImpact: {
-    currentlyInfected: data.reportedCases * 10,
-    infectionsByRequestedTime: this.currentlyInfected * 512,
-    severeCasesByRequestedTime:
-      (15 / 100) * this.infectionsByRequestedTime.covid19ImpactEstimator,
-    hospitalBedsByRequestedTime:
-      (35 / 100) * data.totalHospitalBeds - this.severeCasesByRequestedTime
-  }
+  impact: currentInfections(data),
+  severeImpact: projectedInfections(data)
 });
 
 export default covid19ImpactEstimator;
