@@ -13,8 +13,8 @@ const currentInfections = (data) => {
   const currentlyInfected = data.reportedCases * 10;
   const infectionsByRequestedTime = currentlyInfected * calculatePeriod(data);
   const severeCasesByRequestedTime = (15 / 100) * infectionsByRequestedTime;
-  const compute = (35 / 100) * severeCasesByRequestedTime;
-  const hospitalBedsByRequestedTime = data.totalHospitalBeds - compute;
+  const compute = (35 / 100) * data.totalHospitalBeds;
+  const hospitalBedsByRequestedTime = compute - severeCasesByRequestedTime;
 
   return {
     currentlyInfected,
@@ -27,8 +27,8 @@ const projectedInfections = (data) => {
   const currentlyInfected = data.reportedCases * 50;
   const infectionsByRequestedTime = currentlyInfected * calculatePeriod(data);
   const severeCasesByRequestedTime = (15 / 100) * infectionsByRequestedTime;
-  const compute = (35 / 100) * severeCasesByRequestedTime;
-  const hospitalBedsByRequestedTime = data.totalHospitalBeds - compute;
+  const compute = (35 / 100) * data.totalHospitalBeds;
+  const hospitalBedsByRequestedTime = compute - severeCasesByRequestedTime;
 
   return {
     currentlyInfected,
