@@ -1,18 +1,3 @@
-/* eslint-disable no-shadow */
-// const data = {
-//   region: {
-//     name: 'Africa',
-//     avgAge: 19.7,
-//     avgDailyIncomeInUSD: 5,
-//     avgDailyIncomePopulation: 0.71
-//   },
-//   periodType: 'days',
-//   timeToElapse: 58,
-//   reportedCases: 674,
-//   population: 66622705,
-//   totalHospitalBeds: 1380614
-// };
-
 const calculatePeriod = (data) => {
   if (data.periodType === 'weeks') {
     return 2 ** Math.floor((data.timeToElapse * 7) / 3);
@@ -27,23 +12,31 @@ const calculatePeriod = (data) => {
 const currentInfections = (data) => {
   const currentlyInfected = data.reportedCases * 10;
   const infectionsByRequestedTime = currentlyInfected * calculatePeriod(data);
+  const severeCasesByRequestedTime = (15 / 100) * infectionsByRequestedTime;
+  const hospitalBedsByRequestedTime =
+    data.totalHospitalBeds - (35 / 100) * severeCasesByRequestedTime;
 
   return {
     currentlyInfected,
-    infectionsByRequestedTime
+    infectionsByRequestedTime,
+    severeCasesByRequestedTime,
+    hospitalBedsByRequestedTime
   };
 };
 const projectedInfections = (data) => {
   const currentlyInfected = data.reportedCases * 50;
   const infectionsByRequestedTime = currentlyInfected * calculatePeriod(data);
+  const severeCasesByRequestedTime = (15 / 100) * infectionsByRequestedTime;
+  const hospitalBedsByRequestedTime =
+    data.totalHospitalBeds - (35 / 100) * severeCasesByRequestedTime;
 
   return {
     currentlyInfected,
-    infectionsByRequestedTime
+    infectionsByRequestedTime,
+    severeCasesByRequestedTime,
+    hospitalBedsByRequestedTime
   };
 };
-
-//   infectionsByRequestedTime: this.currentlyInfected * 512
 
 const covid19ImpactEstimator = (data) => ({
   data,
