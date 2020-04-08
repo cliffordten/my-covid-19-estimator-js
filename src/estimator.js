@@ -25,20 +25,20 @@ const calculatePeriod = (data) => {
 };
 
 const currentInfections = (data) => {
-  const currentInfections = data.reportedCases * 10;
-  const infectionsByRequestedTime = currentInfections * calculatePeriod(data);
+  const currentlyInfected = data.reportedCases * 10;
+  const infectionsByRequestedTime = currentlyInfected * calculatePeriod(data);
 
   return {
-    currentInfections,
+    currentlyInfected,
     infectionsByRequestedTime
   };
 };
 const projectedInfections = (data) => {
-  const currentInfections = data.reportedCases * 50;
-  const infectionsByRequestedTime = currentInfections * calculatePeriod(data);
+  const currentlyInfected = data.reportedCases * 50;
+  const infectionsByRequestedTime = currentlyInfected * calculatePeriod(data);
 
   return {
-    currentInfections,
+    currentlyInfected,
     infectionsByRequestedTime
   };
 };
