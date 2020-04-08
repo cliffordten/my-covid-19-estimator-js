@@ -17,7 +17,7 @@ const getDays = (data) => {
   }
 
   return 1;
-}
+};
 const currentInfections = (data) => {
   const currentlyInfected = data.reportedCases * 10;
   const infectionsByRequestedTime = currentlyInfected * calculatePeriod(data);
