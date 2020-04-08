@@ -10,13 +10,13 @@ const calculatePeriod = (data) => {
 };
 const getDays = (data) => {
   if (data.periodType === 'weeks') {
-    return 7;
+    return 7 * data.timeToElapse;
   }
   if (data.periodType === 'months') {
-    return 30;
+    return 30 * data.timeToElapse;
   }
 
-  return 1;
+  return 1 * data.timeToElapse;
 };
 const currentInfections = (data) => {
   const currentlyInfected = data.reportedCases * 10;
@@ -26,8 +26,8 @@ const currentInfections = (data) => {
   const hospitalBedsByRequestedTime = compute - severeCasesByRequestedTime;
   const casesForICUByRequestedTime = (5 / 100) * infectionsByRequestedTime;
   const casesForVentilatorsByRequestedTime = (2 / 100) * infectionsByRequestedTime;
-  const rst = data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation;
-  const dollarsInFlight = infectionsByRequestedTime * rst * getDays(data);
+  const result = data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation;
+  const dollarsInFlight = infectionsByRequestedTime * result * getDays(data);
 
   return {
     currentlyInfected,
@@ -47,8 +47,8 @@ const projectedInfections = (data) => {
   const hospitalBedsByRequestedTime = compute - severeCasesByRequestedTime;
   const casesForICUByRequestedTime = (5 / 100) * infectionsByRequestedTime;
   const casesForVentilatorsByRequestedTime = (2 / 100) * infectionsByRequestedTime;
-  const rst = data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation;
-  const dollarsInFlight = infectionsByRequestedTime * rst * getDays(data);
+  const result = data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation;
+  const dollarsInFlight = infectionsByRequestedTime * result * getDays(data);
 
   return {
     currentlyInfected,
