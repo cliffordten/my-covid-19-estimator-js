@@ -15,11 +15,7 @@
 
 const currentInfections = (data) => {
   const currentInfections = data.reportedCases * 10;
-  const infectionsByRequestedTime = {
-    days: currentInfections * 2 ** Math.floor(1 / 3),
-    weeks: currentInfections * 2 ** Math.floor(7 / 3),
-    months: currentInfections * 2 ** Math.floor(30 / 3)
-  };
+  const infectionsByRequestedTime = currentInfections * 2 ** Math.floor(28 / 3);
 
   return {
     currentInfections,
@@ -28,11 +24,7 @@ const currentInfections = (data) => {
 };
 const projectedInfections = (data) => {
   const currentInfections = data.reportedCases * 50;
-  const infectionsByRequestedTime = {
-    days: currentInfections * 2 ** Math.floor(1 / 3),
-    weeks: currentInfections * 2 ** Math.floor(7 / 3),
-    months: currentInfections * 2 ** Math.floor(30 / 3)
-  };
+  const infectionsByRequestedTime = currentInfections * 2 ** Math.floor(28 / 3);
 
   return {
     currentInfections,
