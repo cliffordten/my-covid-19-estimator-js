@@ -13,9 +13,21 @@
 //   totalHospitalBeds: 1380614
 // };
 
+const calculatePeriod = (data) => {
+
+  if(data.periodType == "weeks"){
+    return 2 ** Math.floor((data.timeToElapse * 7) / 3)
+  }
+  if(data.periodType == "months"){
+    return 2 ** Math.floor((data.timeToElapse * 30) / 3)
+  }
+
+  return 2 ** Math.floor(data.timeToElapse / 3);
+}
+
 const currentInfections = (data) => {
   const currentInfections = data.reportedCases * 10;
-  const infectionsByRequestedTime = currentInfections * 2 ** Math.floor(28 / 3);
+  const infectionsByRequestedTime = currentInfections * calculatePeriod(data);
 
   return {
     currentInfections,
@@ -24,7 +36,7 @@ const currentInfections = (data) => {
 };
 const projectedInfections = (data) => {
   const currentInfections = data.reportedCases * 50;
-  const infectionsByRequestedTime = currentInfections * 2 ** Math.floor(28 / 3);
+  const infectionsByRequestedTime = currentInfections * calculatePeriod(data);
 
   return {
     currentInfections,
