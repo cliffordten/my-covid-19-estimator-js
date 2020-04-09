@@ -4,20 +4,28 @@
   "repository": "git@github.com:BuildforSDG-Cohort1-Assessment/covid-19-estimator-js.git",
   "license": "MIT",
   "private": false,
+  "main": "./src/backend/server.js",
   "scripts": {
-    "lint": "eslint ./src/"
+    "lint": "eslint ./src/",
+    "start": "NODE_ENV=production node ./src/backend/server.js",
+    "dev": "nodemon ./src/backend/server.js"
   },
   "dependencies": {
-    "on-covid-19": "^0.1.3"
+    "dotenv": "^8.2.0",
+    "easyxml": "^2.0.1",
+    "express": "^4.17.1",
+    "on-covid-19": "^0.1.3",
+    "xml": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "babel-jest": "^25.2.0",
-    "jest": "^25.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.20.1"
+    "eslint-plugin-import": "^2.20.1",
+    "jest": "^25.2.0",
+    "nodemon": "^2.0.3"
   },
   "browserslist": [
     "last 1 Chrome versions"
