@@ -24,10 +24,14 @@ const currentInfections = (data) => {
   const severeCasesByRequestedTime = (15 / 100) * infectionsByRequestedTime;
   const compute = (35 / 100) * data.totalHospitalBeds;
   const hospitalBedsByRequestedTime = Math.ceil(compute - severeCasesByRequestedTime);
-  const casesForICUByRequestedTime = ((5 / 100) * infectionsByRequestedTime);
-  const casesForVentilatorsByRequestedTime = ((2 / 100) * infectionsByRequestedTime);
+  const casesForICUByRequestedTimeR = ((5 / 100) * infectionsByRequestedTime);
+  const casesForVentilatorsByRequestedTimeR = ((2 / 100) * infectionsByRequestedTime);
   const result = data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation;
-  const dollarsInFlight = Math.trunc(infectionsByRequestedTime * result * getDays(data));
+  const dollarsInFlightR = (infectionsByRequestedTime * result * getDays(data));
+
+  const casesForICUByRequestedTime = Math.floor(casesForICUByRequestedTimeR);
+  const casesForVentilatorsByRequestedTime = Math.floor(casesForVentilatorsByRequestedTimeR);
+  const dollarsInFlight = Math.floor(dollarsInFlightR);
 
   return {
     currentlyInfected,
@@ -45,10 +49,15 @@ const projectedInfections = (data) => {
   const severeCasesByRequestedTime = (15 / 100) * infectionsByRequestedTime;
   const compute = (35 / 100) * data.totalHospitalBeds;
   const hospitalBedsByRequestedTime = Math.ceil(compute - severeCasesByRequestedTime);
-  const casesForICUByRequestedTime = ((5 / 100) * infectionsByRequestedTime);
-  const casesForVentilatorsByRequestedTime = ((2 / 100) * infectionsByRequestedTime);
+  const casesForICUByRequestedTimeR = ((5 / 100) * infectionsByRequestedTime);
+  const casesForVentilatorsByRequestedTimeR = ((2 / 100) * infectionsByRequestedTime);
   const result = data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation;
-  const dollarsInFlight = Math.trunc(infectionsByRequestedTime * result * getDays(data));
+  const dollarsInFlightR = (infectionsByRequestedTime * result) * getDays(data);
+
+
+  const casesForICUByRequestedTime = Math.floor(casesForICUByRequestedTimeR);
+  const casesForVentilatorsByRequestedTime = Math.floor(casesForVentilatorsByRequestedTimeR);
+  const dollarsInFlight = Math.floor(dollarsInFlightR);
 
   return {
     currentlyInfected,
