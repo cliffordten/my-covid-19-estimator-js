@@ -1,9 +1,9 @@
 const calculatePeriod = (data) => {
   if (data.periodType === 'weeks') {
-    return 2 ** Math.floor((data.timeToElapse * 7) / 3);
+    return 2 ** Math.trunc((data.timeToElapse * 7) / 3);
   }
   if (data.periodType === 'months') {
-    return 2 ** Math.floor((data.timeToElapse * 30) / 3);
+    return 2 ** Math.trunc((data.timeToElapse * 30) / 3);
   }
 
   return 2 ** Math.trunc(data.timeToElapse / 3);
@@ -29,9 +29,9 @@ const currentInfections = (data) => {
   const result = data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation;
   const dollarsInFlightR = (infectionsByRequestedTime * result) / getDays(data);
 
-  const casesForICUByRequestedTime = (casesForICUByRequestedTimeR);
-  const casesForVentilatorsByRequestedTime = (casesForVentilatorsByRequestedTimeR);
-  const dollarsInFlight = (dollarsInFlightR);
+  const casesForICUByRequestedTime = Math.trunc(casesForICUByRequestedTimeR);
+  const casesForVentilatorsByRequestedTime = Math.trunc(casesForVentilatorsByRequestedTimeR);
+  const dollarsInFlight = Math.trunc(dollarsInFlightR);
 
   return {
     currentlyInfected,
@@ -55,9 +55,9 @@ const projectedInfections = (data) => {
   const dollarsInFlightR = (infectionsByRequestedTime * result) / getDays(data);
 
 
-  const casesForICUByRequestedTime = (casesForICUByRequestedTimeR);
-  const casesForVentilatorsByRequestedTime = (casesForVentilatorsByRequestedTimeR);
-  const dollarsInFlight = (dollarsInFlightR);
+  const casesForICUByRequestedTime = Math.trunc(casesForICUByRequestedTimeR);
+  const casesForVentilatorsByRequestedTime = Math.trunc(casesForVentilatorsByRequestedTimeR);
+  const dollarsInFlight = Math.trunc(dollarsInFlightR);
 
   return {
     currentlyInfected,
