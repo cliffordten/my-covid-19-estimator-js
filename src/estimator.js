@@ -25,9 +25,9 @@ const currentInfections = (data) => {
   const compute = (35 / 100) * data.totalHospitalBeds;
   const hospitalBedsByRequestedTime = Math.ceil(compute - severeCasesByRequestedTime);
   const casesForICUByRequestedTime = (5 / 100) * infectionsByRequestedTime;
-  const casesForVentilatorsByRequestedTime = (2 / 100) * infectionsByRequestedTime;
+  const casesForVentilatorsByRequestedTime = Math.floor((2 / 100) * infectionsByRequestedTime);
   const result = data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation;
-  const dollarsInFlight = infectionsByRequestedTime * Math.floor(result) * getDays(data);
+  const dollarsInFlight = infectionsByRequestedTime * result * getDays(data);
 
   return {
     currentlyInfected,
@@ -46,9 +46,9 @@ const projectedInfections = (data) => {
   const compute = (35 / 100) * data.totalHospitalBeds;
   const hospitalBedsByRequestedTime = Math.ceil(compute - severeCasesByRequestedTime);
   const casesForICUByRequestedTime = (5 / 100) * infectionsByRequestedTime;
-  const casesForVentilatorsByRequestedTime = (2 / 100) * infectionsByRequestedTime;
+  const casesForVentilatorsByRequestedTime = Math.floor((2 / 100) * infectionsByRequestedTime);
   const result = data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation;
-  const dollarsInFlight = infectionsByRequestedTime * Math.floor(result) * getDays(data);
+  const dollarsInFlight = infectionsByRequestedTime * result * getDays(data);
 
   return {
     currentlyInfected,
