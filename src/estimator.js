@@ -1,12 +1,14 @@
+const round = (data) => (data <= 0 ? Math.ceil(data) : Math.floor(data));
+
 const calculatePeriod = (data) => {
   if (data.periodType === 'weeks') {
-    return 2 ** Math.floor((data.timeToElapse * 7) / 3);
+    return 2 ** round((data.timeToElapse * 7) / 3);
   }
   if (data.periodType === 'months') {
-    return 2 ** Math.floor((data.timeToElapse * 30) / 3);
+    return 2 ** round((data.timeToElapse * 30) / 3);
   }
 
-  return 2 ** Math.floor(data.timeToElapse / 3);
+  return 2 ** round(data.timeToElapse / 3);
 };
 const getDays = (data) => {
   if (data.periodType === 'weeks') {
@@ -18,12 +20,11 @@ const getDays = (data) => {
 
   return data.timeToElapse;
 };
-const round = (data) => (data <= 0 ? Math.ceil(data) : Math.floor(data));
 const currentInfections = (data) => {
   const currentlyInfected = data.reportedCases * 10;
   const infectionsByRequestedTime = currentlyInfected * calculatePeriod(data);
   const severeCasesByRequestedTime = round((15 / 100) * infectionsByRequestedTime);
-  const compute = Math.floor((35 / 100) * data.totalHospitalBeds);
+  const compute = round((35 / 100) * data.totalHospitalBeds);
   const hospitalBedsByRequestedTime = compute - severeCasesByRequestedTime;
   const casesForICUByRequestedTime = round((5 / 100) * infectionsByRequestedTime);
   const casesForVentilatorsByRequestedTime = round((2 / 100) * infectionsByRequestedTime);
@@ -44,7 +45,7 @@ const projectedInfections = (data) => {
   const currentlyInfected = data.reportedCases * 50;
   const infectionsByRequestedTime = currentlyInfected * calculatePeriod(data);
   const severeCasesByRequestedTime = round((15 / 100) * infectionsByRequestedTime);
-  const compute = Math.floor((35 / 100) * data.totalHospitalBeds);
+  const compute = round((35 / 100) * data.totalHospitalBeds);
   const hospitalBedsByRequestedTime = compute - severeCasesByRequestedTime;
   const casesForICUByRequestedTime = round((5 / 100) * infectionsByRequestedTime);
   const casesForVentilatorsByRequestedTime = round((2 / 100) * infectionsByRequestedTime);
