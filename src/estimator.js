@@ -5,7 +5,6 @@ const calculatePeriod = (data) => {
   if (data.periodType === 'months') {
     return 2 ** Math.trunc((data.timeToElapse * 30) / 3);
   }
-
   return 2 ** Math.trunc(data.timeToElapse / 3);
 };
 const getDays = (data) => {
@@ -15,7 +14,6 @@ const getDays = (data) => {
   if (data.periodType === 'months') {
     return 30 * data.timeToElapse;
   }
-
   return data.timeToElapse;
 };
 const currentInfections = (data) => {
